@@ -1,0 +1,29 @@
+<p-card [styleClass]="'card-wrap flex column center'">
+  <ng-template pTemplate="content">
+    <div class="field-row flex align-center center" >
+      <span class="label space">Enter PIN code</span>
+      <div class="input-wrap" #pinCodeField>
+      <p-inputOtp [formControl]="pinCode"
+                  [disabled]="pinCode.disabled"
+                  [class]="'pin-field space'"
+                  [integerOnly]="true"
+                  [mask]="!isDecrypted"
+                  [autofocus]="true"
+                  #inputRef
+      ></p-inputOtp>
+      </div>
+      <p-button [styleClass]="'simple-btn space'"
+                [disabled]="pinCode.invalid || pinCode.disabled"
+                (click)="confirmPin()"
+                label="Confirm"></p-button>
+      <p-inputIcon styleClass="btn-icon space pi {{getStatusIcon()}}" (click)="pinCode.enabled && toggleVisibility()"/>
+      <p-inputIcon styleClass="btn-icon space pi pi-pen-to-square" (click)="pinCode.enabled && panel.toggle($event, pinCodeField)"/>
+      <p-overlayPanel #panel>
+        <app-keyboard
+          [control]="pinCode"
+        ></app-keyboard>
+      </p-overlayPanel>
+    </div>
+  </ng-template>
+</p-card>
+

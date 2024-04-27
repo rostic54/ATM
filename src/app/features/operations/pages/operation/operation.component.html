@@ -1,0 +1,24 @@
+<ng-container *ngIf="userInfo$ | async as UseInfo">
+  <h1 class="greeting">Hello, {{ UseInfo.card_holder }}</h1>
+  <div class="tab-wrap">
+    <p-tabView styleClass="tabview-custom">
+      <p-tabPanel header="Card View">
+        <p-card header="Card">
+          <div class="card-section flex center">
+            <app-credit-card [userInfo]="UseInfo"></app-credit-card>
+          </div>
+        </p-card>
+      </p-tabPanel>
+      <p-tabPanel header="Balance">
+        <p-card header="Balance details">
+          <app-balance></app-balance>
+        </p-card>
+      </p-tabPanel>
+      <p-tabPanel header="Withdrawal">
+        <p-card header="Withdrawal operation">
+          <app-withdraw></app-withdraw>
+        </p-card>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</ng-container>

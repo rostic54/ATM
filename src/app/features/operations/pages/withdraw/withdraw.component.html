@@ -1,0 +1,29 @@
+<div class="container flex center">
+  <div class="card-body flex align-center">
+    <label class="label" for="minmax">Enter amount:</label>
+    <div class="wrap" #inputField>
+    <p-inputNumber [formControl]="withdrawAmount"
+                   class="input-field"
+                   inputId="minmax"
+                   mode="decimal"
+                   [placeholder]="'0'"
+                   [showClear]="true"
+                   [min]="0"
+                   [max]="withdrawAmount"></p-inputNumber>
+    </div>
+    <p-button label="Proceed"
+              [styleClass]="'simple-btn'"
+              [disabled]="isWithdrawAmountValid"
+              [loading]="loading"
+              (onClick)="withdraw()"></p-button>
+    <p-inputIcon styleClass="btn-icon space pi pi-pen-to-square" (click)="withdrawAmount.enabled && panel.toggle($event, inputField)"/>
+
+    <p-overlayPanel #panel>
+      <app-keyboard
+        [control]="withdrawAmount"
+        [integer]="true"
+      ></app-keyboard>
+    </p-overlayPanel>
+    <span class="error p-error" *ngIf="withdrawAmount.errors?.['max']">Insufficient funds</span>
+  </div>
+</div>
