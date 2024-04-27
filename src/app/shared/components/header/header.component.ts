@@ -25,5 +25,4 @@ export class HeaderComponent implements OnInit {
   exit(): void {
     this.sessionService.logout();
   }
-
 }
